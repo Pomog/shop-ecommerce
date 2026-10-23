@@ -13,14 +13,89 @@
 
     <!-- Bootstrap JavaScript -->
     <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+    
+    <style>
+        body {
+            --bs-gradient: linear-gradient(
+                190deg,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.1)
+            );
+        }
+    </style>
 
 </head>
-<body>
+<body class="bg-black bg-gradient text-light min-vh-100">
 
     <div class="container-fluid">
         <div>
+            <nav class="navbar navbar-expand-lg bg-black" data-bs-theme="dark">
+                <a>
+                    <img th:src="@{/images/NEL-1.png}" alt="Logo" 
+                        class="navbar-brand" style="height: 80px;">
+                </a>
+                    <button class="navbar-toggler" type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarSupportedContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/users}">Users</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/categories}">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/brands}">Brands</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/products}">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/customers}">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/orders}">Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/shipping}">Shipping</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/reports}">Sales Reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/articles}">Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/menu}">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" 
+                                th:href="@{/settings}">Settings</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </nav>
+
+        </div>
+        <div>
             <h1 th:text="${#strings.isEmpty(message)} ? _ : ${message}">
-                Welcome to the Shop Admin Panel
+                Admin Panel
             </h1>
         </div>
 
