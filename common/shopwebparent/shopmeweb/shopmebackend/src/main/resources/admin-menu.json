@@ -1,0 +1,14 @@
+
+[
+  {"name": "Users", "url": "/users"},
+  {"name": "Categories", "url": "/categories"},
+  {"name": "Brands", "url": "/brands"},
+  {"name": "Products", "url": "/products"},
+  {"name": "Customers", "url": "/customers"},
+  {"name": "Orders", "url": "/orders"},
+  {"name": "Shipping", "url": "/shipping"},
+  {"name": "Sales Reports", "url": "/reports"},
+  {"name": "Articles", "url": "/articles"},
+  {"name": "Menu", "url": "/menu"},
+  {"name": "Settings", "url": "/settings"}
+]
