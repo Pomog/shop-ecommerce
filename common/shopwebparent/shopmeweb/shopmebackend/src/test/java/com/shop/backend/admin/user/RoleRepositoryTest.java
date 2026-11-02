@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+import org.springframework.test.annotation.Rollback;
 
 import com.shop.backend.user.RoleRepository;
 import com.shop.common.entity.Role;
@@ -31,6 +32,7 @@ public class RoleRepositoryTest {
     }
 
     @Test
+    @Rollback (value = false)
     public void testCreateRestRoles() {
         Role roleSalesperson = new Role("Salesperson", 
                             "Manage product price, customers, shipping, orders and sales report");
