@@ -24,7 +24,7 @@ public class UserRepositoryTest {
     private TestEntityManager entityManager;
 
     @Test
-    public void testAddNew() {
+    public void testCreateNewUserWithOneRole() {
         User user = new User();
         user.setEmail("test@example.com");
         user.setPassword("password");
@@ -34,5 +34,58 @@ public class UserRepositoryTest {
         userRepository.save(user);
 
         assertThat(user.getId()).isGreaterThan(0);
+    }
+
+    @Test
+    @Rollback(value = true)
+    public void testCreateNewUserWithTwoRoles() {
+        User user = new User();
+        user.setEmail("test2@example.com");
+        user.setPassword("password");
+        user.setFirstName("William2");
+        user.addRole(entityManager.find(Role.class, 10L));
+        user.addRole(entityManager.find(Role.class, 11L));
+
+        User savedUser = userRepository.save(user);
+
+        assertThat(savedUser.getId()).isEqualTo(user.getId());
+    }
+
+    @Test
+    public void testListAllUsers() {
+        Iterable<User> listUsers = userRepository.findAll();
+        listUsers.forEach(user -> System.out.println(user));
+        assertThat(listUsers).hasSizeGreaterThan(0);
+    }
+
+    @Test 
+    public void testGetUserById() {
+        User user = userRepository.findById(1L).get();
+        System.out.println(user);
+        assertThat(user).isNotNull();
+    }
+
+    @Test
+    @Rollback(value = true)
+    public void testUpdateUserDetails() {
+        String newEmail = "test_updated@example.com";
+        User user = userRepository.findById(1L).get();
+        user.setEnabled(true);
+        user.setEmail(newEmail);
+        User savedUser = userRepository.save(user);
+        assertThat(savedUser.getEmail()).isEqualTo(newEmail);
+    }
+
+    @Test
+    @Rollback (value = true)
+    public void testUpdateUserRoles() {
+        User user = userRepository.findById(1L).get();
+        Role roleSalesperson = entityManager.find(Role.class, 12L);
+        
+        assertThat(user.getRoles()).doesNotContain(roleSalesperson);
+        user.addRole(roleSalesperson);
+        
+        User savedUser = userRepository.save(user);
+        assertThat(savedUser.getRoles()).contains(roleSalesperson);
     }
 }
