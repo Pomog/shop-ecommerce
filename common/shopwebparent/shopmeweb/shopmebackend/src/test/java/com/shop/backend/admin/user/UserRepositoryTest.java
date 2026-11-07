@@ -88,4 +88,12 @@ public class UserRepositoryTest {
         User savedUser = userRepository.save(user);
         assertThat(savedUser.getRoles()).contains(roleSalesperson);
     }
+
+    @Test
+    @Rollback (value = true)
+    public void testDeleteUser() {
+        Long userId = 1L;
+        userRepository.deleteById(userId);
+        assertThat(userRepository.findById(userId)).isEmpty();
+    }
 }
