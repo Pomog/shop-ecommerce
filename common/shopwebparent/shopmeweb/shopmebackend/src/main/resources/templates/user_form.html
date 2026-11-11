@@ -1,0 +1,98 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" rel="stylesheet">
+
+    <title>Create New User</title>
+    <!-- jQuery -->
+    <script th:src="@{/webjars/jquery/4.0.0/jquery.min.js}"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+
+    <style>
+        body {
+            --bs-gradient: linear-gradient(190deg,
+                    rgba(255, 255, 255, 0),
+                    rgba(255, 255, 255, 0.1));
+        }
+    </style>
+
+</head>
+
+<body class="bg-black bg-gradient text-light min-vh-100">
+
+    <div class="container-fluid">
+        <div>
+            <nav class="navbar navbar-expand-lg bg-black" data-bs-theme="dark">
+                <a>
+                    <img th:src="@{/images/NEL-1.png}" alt="Logo" class="navbar-brand" style="height: 80px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" th:each="menuObject : ${adminMenu}">
+                            <a class="nav-link active" th:href="@{${menuObject.url}}" th:text="${menuObject.name}">
+                                Menu item
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+        <main class="py-4">
+            <div class="container">
+                <h1 class="mb-4">Create New User</h1>
+                <form th:action="@{/users/save}" method="post" class="col-lg-8" data-bs-theme="dark">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control"
+                            maxlength="128" autocomplete="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control"
+                            maxlength="64" autocomplete="new-password" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control"
+                                maxlength="45" autocomplete="given-name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control"
+                                maxlength="45" autocomplete="family-name">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Photo path</label>
+                        <input type="text" id="photo" name="photo" class="form-control" maxlength="128">
+                    </div>
+                    <div class="form-check mb-4">
+                        <input type="checkbox" id="enabled" name="enabled" value="true" class="form-check-input">
+                        <label for="enabled" class="form-check-label">Enabled</label>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Save User</button>
+                        <a th:href="@{/users/}" class="btn btn-outline-light">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
